@@ -12,7 +12,7 @@ namespace EmplManagement.Model.DTO
         public DateOnly DOB { get; set; }
         public DateOnly DOJ { get; set; }
         public string BloodGroup { get; set; }
-        public int Phone { get; set; }
+        public long Phone { get; set; }
         public int ExperienceYears { get; set; }
         public DateOnly CareerStartDate { get; set; }
         public DateOnly InterviewedDate { get; set; }

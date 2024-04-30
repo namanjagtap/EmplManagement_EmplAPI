@@ -1,7 +1,10 @@
-﻿using EmplManagement.Data;
+﻿using Azure;
+using EmplManagement.Data;
 using EmplManagement.Model;
 using EmplManagement.Model.DTO;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace EmplManagement.Controllers
 {
@@ -97,6 +100,89 @@ namespace EmplManagement.Controllers
             _db.Employees.Remove(employee);
             _db.SaveChanges();
 
+            return NoContent();
+        }
+
+        [HttpPut("{id:int}", Name = "UpdateEmployee")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult UpdateEmployee(int id, [FromBody] EmployeeDTO employeeDTO)
+        {
+            if(employeeDTO == null || id != employeeDTO.EmplID)
+            {
+                return BadRequest();
+            }
+            Employee model = new()
+            {
+                EmplID = employeeDTO.EmplID,
+                EmplName = employeeDTO.EmplName,
+                DOB = employeeDTO.DOB,
+                DOJ = employeeDTO.DOJ,
+                BloodGroup = employeeDTO.BloodGroup,
+                Phone = employeeDTO.Phone,
+                ExperienceYears = employeeDTO.ExperienceYears,
+                CareerStartDate = employeeDTO.CareerStartDate,
+                InterviewedDate = employeeDTO.InterviewedDate,
+                PreviousCompany = employeeDTO.PreviousCompany,
+                CTC = employeeDTO.CTC
+            };
+            _db.Employees.Update(model);
+            _db.SaveChanges();
+
+            return NoContent();
+        }
+
+        [HttpPatch("{id:int}", Name = "UpdatePartialEmployee")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult UpdatePartialEmployee(int id, JsonPatchDocument<EmployeeDTO> patchDTO)
+        {
+            if(patchDTO == null || id == 0)
+            {
+                return BadRequest();
+            }
+            var employee = _db.Employees.AsNoTracking().FirstOrDefault(u => u.EmplID == id);
+            EmployeeDTO employeeDTO = new()
+            {
+                EmplID = employee.EmplID,
+                EmplName = employee.EmplName,
+                DOB = employee.DOB,
+                DOJ = employee.DOJ,
+                BloodGroup = employee.BloodGroup,
+                Phone = employee.Phone,
+                ExperienceYears = employee.ExperienceYears,
+                CareerStartDate = employee.CareerStartDate,
+                InterviewedDate = employee.InterviewedDate,
+                PreviousCompany = employee.PreviousCompany,
+                CTC = employee.CTC
+            };
+            if (employee == null)
+            {
+                return BadRequest();
+            }
+            patchDTO.ApplyTo(employeeDTO, ModelState);
+
+            Employee model = new()
+            {
+                EmplID = employeeDTO.EmplID,
+                EmplName = employeeDTO.EmplName,
+                DOB = employeeDTO.DOB,
+                DOJ = employeeDTO.DOJ,
+                BloodGroup = employeeDTO.BloodGroup,
+                Phone = employeeDTO.Phone,
+                ExperienceYears = employeeDTO.ExperienceYears,
+                CareerStartDate = employeeDTO.CareerStartDate,
+                InterviewedDate = employeeDTO.InterviewedDate,
+                PreviousCompany = employeeDTO.PreviousCompany,
+                CTC = employeeDTO.CTC
+            };
+            _db.Employees.Update(model);
+            _db.SaveChanges();
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             return NoContent();
         }
     }
