@@ -63,6 +63,10 @@ namespace EmplManagement.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("WorkMode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("EmplID");
 
                     b.ToTable("Employees");
@@ -80,7 +84,8 @@ namespace EmplManagement.Migrations
                             ExperienceYears = 6,
                             InterviewedDate = new DateOnly(2015, 8, 10),
                             Phone = 1234567890L,
-                            PreviousCompany = "ABC Corp"
+                            PreviousCompany = "ABC Corp",
+                            WorkMode = "Office"
                         },
                         new
                         {
@@ -94,7 +99,8 @@ namespace EmplManagement.Migrations
                             ExperienceYears = 8,
                             InterviewedDate = new DateOnly(2017, 3, 20),
                             Phone = 9876543210L,
-                            PreviousCompany = "XYZ Inc"
+                            PreviousCompany = "XYZ Inc",
+                            WorkMode = "Office"
                         },
                         new
                         {
@@ -108,7 +114,8 @@ namespace EmplManagement.Migrations
                             ExperienceYears = 7,
                             InterviewedDate = new DateOnly(2016, 6, 5),
                             Phone = 5551234567L,
-                            PreviousCompany = "LMN Ltd"
+                            PreviousCompany = "LMN Ltd",
+                            WorkMode = "Office"
                         },
                         new
                         {
@@ -122,7 +129,8 @@ namespace EmplManagement.Migrations
                             ExperienceYears = 4,
                             InterviewedDate = new DateOnly(2019, 10, 25),
                             Phone = 9998887776L,
-                            PreviousCompany = "PQR Solutions"
+                            PreviousCompany = "PQR Solutions",
+                            WorkMode = "Office"
                         },
                         new
                         {
@@ -136,7 +144,8 @@ namespace EmplManagement.Migrations
                             ExperienceYears = 12,
                             InterviewedDate = new DateOnly(2010, 10, 10),
                             Phone = 1112223334L,
-                            PreviousCompany = "DEF Corporation"
+                            PreviousCompany = "DEF Corporation",
+                            WorkMode = "Office"
                         },
                         new
                         {
@@ -150,7 +159,8 @@ namespace EmplManagement.Migrations
                             ExperienceYears = 3,
                             InterviewedDate = new DateOnly(2020, 4, 25),
                             Phone = 4445556665L,
-                            PreviousCompany = "GHI Tech"
+                            PreviousCompany = "GHI Tech",
+                            WorkMode = "Office"
                         },
                         new
                         {
@@ -164,7 +174,8 @@ namespace EmplManagement.Migrations
                             ExperienceYears = 9,
                             InterviewedDate = new DateOnly(2014, 12, 1),
                             Phone = 7778889998L,
-                            PreviousCompany = "JKL Innovations"
+                            PreviousCompany = "JKL Innovations",
+                            WorkMode = "Office"
                         },
                         new
                         {
@@ -178,7 +189,8 @@ namespace EmplManagement.Migrations
                             ExperienceYears = 5,
                             InterviewedDate = new DateOnly(2018, 8, 10),
                             Phone = 2223334447L,
-                            PreviousCompany = "MNO Enterprises"
+                            PreviousCompany = "MNO Enterprises",
+                            WorkMode = "Office"
                         },
                         new
                         {
@@ -192,7 +204,8 @@ namespace EmplManagement.Migrations
                             ExperienceYears = 10,
                             InterviewedDate = new DateOnly(2011, 5, 15),
                             Phone = 6667778889L,
-                            PreviousCompany = "STU Solutions"
+                            PreviousCompany = "STU Solutions",
+                            WorkMode = "Remote"
                         },
                         new
                         {
@@ -206,7 +219,8 @@ namespace EmplManagement.Migrations
                             ExperienceYears = 2,
                             InterviewedDate = new DateOnly(2021, 2, 5),
                             Phone = 3334445556L,
-                            PreviousCompany = "VWX Technologies"
+                            PreviousCompany = "VWX Technologies",
+                            WorkMode = "Remote"
                         },
                         new
                         {
@@ -220,7 +234,8 @@ namespace EmplManagement.Migrations
                             ExperienceYears = 6,
                             InterviewedDate = new DateOnly(2017, 9, 3),
                             Phone = 8889990001L,
-                            PreviousCompany = "YZA Corporation"
+                            PreviousCompany = "YZA Corporation",
+                            WorkMode = "Remote"
                         },
                         new
                         {
@@ -234,7 +249,8 @@ namespace EmplManagement.Migrations
                             ExperienceYears = 8,
                             InterviewedDate = new DateOnly(2013, 7, 15),
                             Phone = 4445556667L,
-                            PreviousCompany = "BCD Solutions"
+                            PreviousCompany = "BCD Solutions",
+                            WorkMode = "Office"
                         },
                         new
                         {
@@ -248,7 +264,8 @@ namespace EmplManagement.Migrations
                             ExperienceYears = 7,
                             InterviewedDate = new DateOnly(2016, 3, 10),
                             Phone = 1112223334L,
-                            PreviousCompany = "EFG Inc"
+                            PreviousCompany = "EFG Inc",
+                            WorkMode = "Hybrid"
                         },
                         new
                         {
@@ -262,7 +279,8 @@ namespace EmplManagement.Migrations
                             ExperienceYears = 9,
                             InterviewedDate = new DateOnly(2015, 1, 25),
                             Phone = 5556667778L,
-                            PreviousCompany = "HIJ Tech"
+                            PreviousCompany = "HIJ Tech",
+                            WorkMode = "Hybrid"
                         },
                         new
                         {
@@ -276,7 +294,8 @@ namespace EmplManagement.Migrations
                             ExperienceYears = 4,
                             InterviewedDate = new DateOnly(2020, 10, 1),
                             Phone = 9998887776L,
-                            PreviousCompany = "KLM Enterprises"
+                            PreviousCompany = "KLM Enterprises",
+                            WorkMode = "Hybrid"
                         },
                         new
                         {
@@ -290,7 +309,8 @@ namespace EmplManagement.Migrations
                             ExperienceYears = 11,
                             InterviewedDate = new DateOnly(2011, 11, 15),
                             Phone = 3334445556L,
-                            PreviousCompany = "NOP Corporation"
+                            PreviousCompany = "NOP Corporation",
+                            WorkMode = "Hybrid"
                         },
                         new
                         {
@@ -304,7 +324,8 @@ namespace EmplManagement.Migrations
                             ExperienceYears = 3,
                             InterviewedDate = new DateOnly(2021, 7, 10),
                             Phone = 7778889992L,
-                            PreviousCompany = "QRS Solutions"
+                            PreviousCompany = "QRS Solutions",
+                            WorkMode = "Hybrid"
                         },
                         new
                         {
@@ -318,7 +339,8 @@ namespace EmplManagement.Migrations
                             ExperienceYears = 10,
                             InterviewedDate = new DateOnly(2014, 4, 25),
                             Phone = 4445556667L,
-                            PreviousCompany = "TUV Inc"
+                            PreviousCompany = "TUV Inc",
+                            WorkMode = "Hybrid"
                         },
                         new
                         {
@@ -332,7 +354,8 @@ namespace EmplManagement.Migrations
                             ExperienceYears = 7,
                             InterviewedDate = new DateOnly(2018, 12, 8),
                             Phone = 5556667778L,
-                            PreviousCompany = "WXY Corporation"
+                            PreviousCompany = "WXY Corporation",
+                            WorkMode = "Office"
                         },
                         new
                         {
@@ -346,7 +369,8 @@ namespace EmplManagement.Migrations
                             ExperienceYears = 5,
                             InterviewedDate = new DateOnly(2019, 4, 15),
                             Phone = 1112223334L,
-                            PreviousCompany = "ZAB Tech"
+                            PreviousCompany = "ZAB Tech",
+                            WorkMode = "Office"
                         });
                 });
 #pragma warning restore 612, 618

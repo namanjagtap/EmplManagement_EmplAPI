@@ -6,7 +6,6 @@ namespace EmplManagement.Model
     public class Employee
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int EmplID { get; set; }
         public string EmplName { get; set; }
         public DateOnly DOB { get; set; }
@@ -18,5 +17,6 @@ namespace EmplManagement.Model
         public DateOnly InterviewedDate { get; set; }
         public string PreviousCompany { get; set; }
         public double CTC { get; set; }
+        public string WorkMode { get; set; }
     }
 }

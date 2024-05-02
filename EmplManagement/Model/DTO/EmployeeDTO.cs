@@ -5,7 +5,7 @@ namespace EmplManagement.Model.DTO
 {
     public class EmployeeDTO
     {
-        public int EmplID { get; set; }
+        public int EmplID { get; set; } = 0;
         [Required]
         [MaxLength(50)]
         public string EmplName { get; set; }
@@ -18,5 +18,6 @@ namespace EmplManagement.Model.DTO
         public DateOnly InterviewedDate { get; set; }
         public string PreviousCompany { get; set; }
         public double CTC { get; set; }
+        public string WorkMode { get; set; }
     }
 }

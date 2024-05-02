@@ -26,6 +26,12 @@ namespace EmplManagement.Controllers
         {
             return Ok(_db.Employees.ToList());
         }
+        [HttpGet("count")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public ActionResult<IEnumerable<int>> GetTotalEmployee()
+        {
+            return Ok(_db.Employees.Count());
+        }
 
         [HttpGet("{id:int}", Name = "GetEmployee")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -44,7 +50,7 @@ namespace EmplManagement.Controllers
             }
             return Ok(employee);
         }
-        [HttpPost("{id:int}", Name = "CreateEmployee")]
+        [HttpPost(Name = "CreateEmployee")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -58,10 +64,6 @@ namespace EmplManagement.Controllers
             {
                 return NotFound();
             }
-            if(employeeDTO.EmplID > 0)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError);
-            }
             Employee model = new()
             {
                 EmplID = employeeDTO.EmplID,
@@ -74,7 +76,8 @@ namespace EmplManagement.Controllers
                 CareerStartDate = employeeDTO.CareerStartDate,
                 InterviewedDate = employeeDTO.InterviewedDate,
                 PreviousCompany = employeeDTO.PreviousCompany,
-                CTC = employeeDTO.CTC
+                CTC = employeeDTO.CTC,
+                WorkMode = employeeDTO.WorkMode,
             };
             _db.Employees.Add(model);
             _db.SaveChanges();
