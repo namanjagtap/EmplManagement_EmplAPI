@@ -127,7 +127,8 @@ namespace EmplManagement.Controllers
                 CareerStartDate = employeeDTO.CareerStartDate,
                 InterviewedDate = employeeDTO.InterviewedDate,
                 PreviousCompany = employeeDTO.PreviousCompany,
-                CTC = employeeDTO.CTC
+                CTC = employeeDTO.CTC,
+                WorkMode = employeeDTO.WorkMode,
             };
             _db.Employees.Update(model);
             _db.SaveChanges();
@@ -157,7 +158,8 @@ namespace EmplManagement.Controllers
                 CareerStartDate = employee.CareerStartDate,
                 InterviewedDate = employee.InterviewedDate,
                 PreviousCompany = employee.PreviousCompany,
-                CTC = employee.CTC
+                CTC = employee.CTC,
+                WorkMode = employee.WorkMode,
             };
             if (employee == null)
             {
@@ -177,7 +179,8 @@ namespace EmplManagement.Controllers
                 CareerStartDate = employeeDTO.CareerStartDate,
                 InterviewedDate = employeeDTO.InterviewedDate,
                 PreviousCompany = employeeDTO.PreviousCompany,
-                CTC = employeeDTO.CTC
+                CTC = employeeDTO.CTC,
+                WorkMode = employeeDTO.WorkMode,
             };
             _db.Employees.Update(model);
             _db.SaveChanges();
