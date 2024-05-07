@@ -2,6 +2,7 @@
 using EmplManagement.Data;
 using EmplManagement.Model;
 using EmplManagement.Model.DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -13,11 +14,28 @@ namespace EmplManagement.Controllers
     public class EmployeeAPIController : ControllerBase
     {
         private readonly ApplicationDbContext _db;
+        private readonly IConfiguration _configuration;
 
-
-        public EmployeeAPIController(ApplicationDbContext db)
+        public EmployeeAPIController(ApplicationDbContext db, IConfiguration configuration)
         {
             _db = db;
+            _configuration = configuration;
+        }
+
+        [HttpGet("private")]
+        [Authorize]
+        public IActionResult Private()
+        {
+            string scheme = "https";
+            if (!User.HasClaim(c => c.Issuer == $"{scheme}://{_configuration.GetSection("Auth0:domain").Value}/"))
+            {
+                return Unauthorized("Insufficient scope");
+            }
+
+            return Ok(new
+            {
+                Message = "Hello from a private endpoint!"
+            });
         }
 
         [HttpGet]
@@ -26,11 +44,22 @@ namespace EmplManagement.Controllers
         {
             return Ok(_db.Employees.ToList());
         }
+
         [HttpGet("count")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<IEnumerable<int>> GetTotalEmployee()
         {
             return Ok(_db.Employees.Count());
+        }
+
+        [HttpGet("private-scoped")]
+        [Authorize("read:messages")]
+        public IActionResult scoped()
+        {
+            return Ok(new
+            {
+                Message = "Hello From Private Endpoint!"
+            });
         }
 
         [HttpGet("{id:int}", Name = "GetEmployee")]
@@ -127,7 +156,8 @@ namespace EmplManagement.Controllers
                 CareerStartDate = employeeDTO.CareerStartDate,
                 InterviewedDate = employeeDTO.InterviewedDate,
                 PreviousCompany = employeeDTO.PreviousCompany,
-                CTC = employeeDTO.CTC
+                CTC = employeeDTO.CTC,
+                WorkMode = employeeDTO.WorkMode,
             };
             _db.Employees.Update(model);
             _db.SaveChanges();
@@ -157,7 +187,8 @@ namespace EmplManagement.Controllers
                 CareerStartDate = employee.CareerStartDate,
                 InterviewedDate = employee.InterviewedDate,
                 PreviousCompany = employee.PreviousCompany,
-                CTC = employee.CTC
+                CTC = employee.CTC,
+                WorkMode = employee.WorkMode,
             };
             if (employee == null)
             {
@@ -177,7 +208,8 @@ namespace EmplManagement.Controllers
                 CareerStartDate = employeeDTO.CareerStartDate,
                 InterviewedDate = employeeDTO.InterviewedDate,
                 PreviousCompany = employeeDTO.PreviousCompany,
-                CTC = employeeDTO.CTC
+                CTC = employeeDTO.CTC,
+                WorkMode = employeeDTO.WorkMode
             };
             _db.Employees.Update(model);
             _db.SaveChanges();
