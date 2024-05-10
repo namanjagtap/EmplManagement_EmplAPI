@@ -22,9 +22,10 @@ namespace EmplManagement.Controllers
             _configuration = configuration;
         }
 
-        [HttpGet("private")]
+        [HttpGet]
         [Authorize]
-        public IActionResult Private()
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public ActionResult<IEnumerable<EmployeeDTO>> GetEmployees()
         {
             string scheme = "https";
             if (!User.HasClaim(c => c.Issuer == $"{scheme}://{_configuration.GetSection("Auth0:domain").Value}/"))
@@ -32,16 +33,6 @@ namespace EmplManagement.Controllers
                 return Unauthorized("Insufficient scope");
             }
 
-            return Ok(new
-            {
-                Message = "Hello from a private endpoint!"
-            });
-        }
-
-        [HttpGet]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        public ActionResult<IEnumerable<EmployeeDTO>> GetEmployees()
-        {
             return Ok(_db.Employees.ToList());
         }
 
